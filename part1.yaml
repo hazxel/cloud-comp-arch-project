@@ -13,7 +13,7 @@ spec:
   cloudConfig:
     gceServiceAccount: default
   cloudProvider: gce
-  configBase: gs://cca-eth-2022-group-XXX-ethzid/part1.k8s.local
+  configBase: gs://cca-eth-2022-group-24-boyan/part1.k8s.local
   containerRuntime: docker
   etcdClusters:
   - cpuRequest: 200m
@@ -35,12 +35,12 @@ spec:
     anonymousAuth: false
   kubernetesApiAccess:
   - 0.0.0.0/0
-  kubernetesVersion: 1.19.7
+  kubernetesVersion: 1.22.5
   masterPublicName: api.part1.k8s.local
   networking:
     kubenet: {}
   nonMasqueradeCIDR: 100.64.0.0/10
-  project: cca-eth-2022-group-XXX
+  project: cca-eth-2022-group-24
   sshAccess:
   - 0.0.0.0/0
   subnets:
