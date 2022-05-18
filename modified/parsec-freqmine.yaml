@@ -15,4 +15,4 @@ spec:
         args: ["-c", "./bin/parsecmgmt -a run -p freqmine -i native -n 12"]
       restartPolicy: Never
       nodeSelector:
-        cca-project-nodetype: "node-c-8core"
+        cca-project-nodetype: "node-b-4core"

@@ -12,7 +12,7 @@ spec:
         name: parseccanneal
         imagePullPolicy: Always
         command: ["/bin/sh"]
-        args: ["-c", "./bin/parsecmgmt -a run -p canneal -i native -n 6"]
+        args: ["-c", "./bin/parsecmgmt -a run -p canneal -i native -n 12"]
       restartPolicy: Never
       nodeSelector:
         cca-project-nodetype: "node-b-4core"

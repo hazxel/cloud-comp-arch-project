@@ -1,6 +1,14 @@
+# run memcached
+kubectl create -f memcache-t1-cpuset.yaml
+kubectl expose pod some-memcached --name some-memcached-11211  --type LoadBalancer --port 11211 --protocol TCP
+sleep 60
+kubectl get service some-memcached-11211
+kubectl get pods -o wide
+
 # ssh login
-gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-agent-b-6f7c \
-                     --zone europe-west3-a
+gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-agent-a-vxw9 --zone europe-west3-a
+gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-agent-b-5slm --zone europe-west3-a
+gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-measure-5s2t --zone europe-west3-a
 
 sudo apt-get update
 sudo apt-get install libevent-dev libzmq3-dev git make g++ --yes
@@ -18,8 +26,10 @@ make
 # measure
 ./mcperf -s MEMCACHED_IP --loadonly
 ./mcperf -s MEMCACHED_IP -a INTERNAL_AGENT_IP  \
-           --noload -T 16 -C 4 -D 4 -Q 1000 -c 4 -t 5 \
-           --scan 5000:55000:5000
+           --noload -T 6 -C 4 -D 4 -Q 1000 -c 4 -t 20 \
+           --scan 30000:30500:10
 
 # MEMCACHED_IP is from the output of kubectl get pods -o wide above and INTERNAL_AGENT_IP is from the Internal IP of the client-agent node from the output of kubectl get nodes -o wide.
 # You should look at the output of ./mcperf -h to understand the different flags in the above com- mands.
+
+# clean
