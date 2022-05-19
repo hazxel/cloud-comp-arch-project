@@ -1,3 +1,4 @@
+from pydoc import cli
 import psutil
 import docker
 from time import sleep
@@ -46,19 +47,42 @@ def unpause(client, name):
 
 if __name__ == '__main__':
   client = docker.from_env()
-
-  ready = ["fft", "blackscholes", "canneal", "dedup", "ferret", "freqmine"]
+  # ready = ["fft", "blackscholes", "canneal", "dedup", "ferret", "freqmine"]
+  ready = ["fft"]
   running = []
   paused = []
   completed = []
 
-  # run(client, ready[0])
-  # pause(client, ready[0])
-  while len(ready) != 0 or len(paused) != 0 or len(running) != 0:
+  # print(psutil.cpu_times())
+  # print(psutil.cpu_percent(interval=1))
+  # print(psutil.cpu_percent(interval=1, percpu=True))
+
+  while ready or paused or running:
     # update completed tasks
+    for container in running:
+      try:
+        client.containers.get(container)
+      except:
+        running.remove(container)
+        completed.append(container)
 
-    # check cpu usage
 
-    # pause/unpause
-    
-    sleep(0.01)
+    # check cpu usage and pause/unpause
+    if psutil.cpu_percent(interval=1) < 50:
+      if paused:
+        run_this = paused.pop()
+        run(client, run_this)
+        running.append(run_this)
+      elif ready:
+        run_this = ready.pop()
+        run(client, run_this)
+        running.append(run_this)
+    elif psutil.cpu_percent(interval=1) > 80 and running:
+      pause_this = running.pop()
+      pause(client, pause_this)
+      paused.append(pause_this)
+
+    sleep(1)
+    print(running)
+    print(paused)
+    print(completed)
