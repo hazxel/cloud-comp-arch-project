@@ -14,7 +14,7 @@ fft = {
 
 freqmine = {
     'image': 'anakli/parsec:freqmine-native-reduced',
-    'command': './bin/parsecmgmt -a run -p freqmine -i native -n 3',
+    'command': './bin/parsecmgmt -a run -p freqmine -i native -n 4',
     'cpuset_cpus': '0-3',
     'detach': True,
     'name': 'freqmine',
@@ -23,7 +23,7 @@ freqmine = {
 
 ferret = {
     'image': 'anakli/parsec:ferret-native-reduced',
-    'command': './bin/parsecmgmt -a run -p ferret -i native -n 3',
+    'command': './bin/parsecmgmt -a run -p ferret -i native -n 1',
     'cpuset_cpus': '0-3',
     'detach': True,
     'name': 'ferret',
@@ -32,7 +32,7 @@ ferret = {
 
 canneal = {
     'image': 'anakli/parsec:canneal-native-reduced',
-    'command': './bin/parsecmgmt -a run -p canneal -i native -n 1',
+    'command': './bin/parsecmgmt -a run -p canneal -i native -n 4',
     'cpuset_cpus': '1',
     'detach': True,
     'name': 'canneal',
@@ -50,7 +50,7 @@ dedup = {
 
 blackscholes = {
     'image': 'anakli/parsec:blackscholes-native-reduced',
-    'command': './bin/parsecmgmt -a run -p blackscholes -i native -n 3',
+    'command': './bin/parsecmgmt -a run -p blackscholes -i native -n 4',
     'cpuset_cpus': '0-3',
     'detach': True,
     'name': 'blackscholes',
