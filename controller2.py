@@ -23,7 +23,7 @@ freqmine = {
 
 ferret = {
     'image': 'anakli/parsec:ferret-native-reduced',
-    'command': './bin/parsecmgmt -a run -p ferret -i native -n 1',
+    'command': './bin/parsecmgmt -a run -p ferret -i native -n 4',
     'cpuset_cpus': '0-3',
     'detach': True,
     'name': 'ferret',
@@ -32,7 +32,7 @@ ferret = {
 
 canneal = {
     'image': 'anakli/parsec:canneal-native-reduced',
-    'command': './bin/parsecmgmt -a run -p canneal -i native -n 4',
+    'command': './bin/parsecmgmt -a run -p canneal -i native -n 1',
     'cpuset_cpus': '1',
     'detach': True,
     'name': 'canneal',
